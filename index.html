@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#233d36">
+  <title>PikoBuy spreadsheet: categorieën, QC en keuzehulp</title>
+  <meta name="description" content="Gebruik de PikoBuy spreadsheet met meer overzicht. Ontdek kledingcategorieën, vergelijk maten en QC-foto’s en lees praktische tips voor je selectie.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:title" content="PikoBuy spreadsheet: eerst vergelijken, dan kiezen">
+  <meta property="og:description" content="Een onafhankelijke Nederlandstalige keuzehulp voor sneakers, kleding en accessoires. Met categorieën, controlepunten en duidelijke antwoorden.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PikoBuy spreadsheet: categorieën en keuzehulp">
+  <meta name="twitter:description" content="Vergelijk pasvorm, productinformatie en QC-foto’s voordat je een selectie maakt.">
+  <link rel="preconnect" href="https://images.footlocker.com">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f2e9;
+      --white: #fffefa;
+      --ink: #202e29;
+      --muted: #56645b;
+      --green: #233d36;
+      --lime: #dce895;
+      --line: #d8dcd0;
+      --peach: #efd8c4;
+      --radius: 18px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-underline-offset: 4px; }
+    a:focus-visible, summary:focus-visible {
+      outline: 3px solid #a94921;
+      outline-offset: 5px;
+    }
+    img { display: block; max-width: 100%; }
+    h1, h2, h3, p, figure { margin: 0; }
+    h1, h2, h3 { line-height: 1.14; }
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 5.1rem);
+      letter-spacing: -.06em;
+      max-width: 760px;
+      margin: 17px 0 23px;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.7vw, 2.8rem);
+      letter-spacing: -.04em;
+    }
+    h3 { font-size: 1.2rem; letter-spacing: -.02em; }
+    p + p { margin-top: 15px; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .eyebrow {
+      font-size: .76rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+    }
+    .muted { color: var(--muted); }
+    .masthead { border-bottom: 1px solid var(--line); }
+    .masthead-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      min-height: 80px;
+    }
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 850;
+      letter-spacing: -.05em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .logo span { color: #657248; }
+    .masthead-note { font-size: .82rem; color: var(--muted); }
+    .toplink { font-size: .85rem; font-weight: 700; }
+    .categories { padding: 27px 0 31px; }
+    .category-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+    .category-heading p { font-size: .81rem; color: var(--muted); }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .category-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 53px;
+      padding: 12px 14px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      text-decoration: none;
+      font-size: .84rem;
+      font-weight: 650;
+    }
+    .category-grid a:hover { background: var(--lime); border-color: #adbe6d; }
+    .category-grid span { color: #75806b; }
+    .hero {
+      background: var(--green);
+      color: var(--white);
+      border-radius: 24px;
+      display: grid;
+      grid-template-columns: 1.18fr .82fr;
+      overflow: hidden;
+    }
+    .hero-copy { padding: clamp(26px, 4vw, 51px); }
+    .hero .eyebrow { color: var(--lime); }
+    .hero-copy > p:not(.eyebrow) { max-width: 560px; color: #e0e8dd; }
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 21px;
+      margin-top: 27px;
+      border-radius: 8px;
+      background: var(--lime);
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 750;
+    }
+    .button:hover { background: #e8f3ad; }
+    .hero-note {
+      margin-top: 16px;
+      font-size: .77rem;
+      color: #d0dcce;
+    }
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      background: #ecece5;
+      color: var(--green);
+      margin: 18px 18px 18px 0;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .hero-visual img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #fff;
+    }
+    .hero-visual figcaption { padding: 20px 24px; font-size: .85rem; }
+    .hero-visual strong { display: block; font-size: 1.12rem; margin-bottom: 5px; }
+    .answer {
+      display: grid;
+      grid-template-columns: .42fr 1fr;
+      gap: 36px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .answer h2 { font-size: 1.4rem; letter-spacing: -.025em; }
+    .section { padding: 62px 0; }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 27px;
+    }
+    .section-heading .eyebrow { margin-bottom: 10px; color: #637046; }
+    .section-heading > p { max-width: 400px; font-size: .92rem; color: var(--muted); }
+    .inspiration {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    .visual-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .visual-card img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1.12;
+      object-fit: contain;
+      background: #fff;
+    }
+    .visual-card figcaption { padding: 20px; }
+    .visual-card h3 { margin-bottom: 9px; }
+    .visual-card p { font-size: .87rem; color: var(--muted); }
+    .visual-card a { display: inline-block; margin-top: 15px; font-size: .82rem; font-weight: 750; }
+    .image-note { margin-top: 17px; font-size: .78rem; color: var(--muted); }
+    .guide-layout {
+      display: grid;
+      grid-template-columns: .65fr 1.35fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .guide-intro {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--peach);
+    }
+    .guide-intro h2 { margin: 14px 0 18px; }
+    .guide-intro p { font-size: .94rem; }
+    .guide-stack { display: grid; gap: 15px; }
+    .guide {
+      background: var(--white);
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .guide .number {
+      color: #6d794c;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+    }
+    .guide h3 { margin-bottom: 15px; }
+    .guide p { font-size: .93rem; color: var(--muted); }
+    .table-shell {
+      overflow-x: auto;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: .91rem; }
+    caption { text-align: left; padding: 22px; font-weight: 750; }
+    th, td { padding: 18px 22px; border-top: 1px solid var(--line); vertical-align: top; }
+    thead th { background: #e8ecdf; font-size: .78rem; }
+    tbody th { min-width: 160px; font-weight: 700; }
+    .topics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .topic {
+      padding: 27px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+    .topic h3 { margin: 12px 0 16px; }
+    .topic p { font-size: .91rem; color: var(--muted); }
+    .topic ul { padding-left: 20px; margin: 18px 0 0; font-size: .87rem; }
+    .topic li + li { margin-top: 10px; }
+    .faq-layout { display: grid; grid-template-columns: .6fr 1fr; gap: 55px; }
+    .faq-heading p { color: var(--muted); margin-top: 18px; }
+    details { border-bottom: 1px solid var(--line); padding: 21px 0; }
+    details:first-child { border-top: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 750; padding-right: 12px; }
+    details p { margin: 15px 0 3px; color: var(--muted); font-size: .94rem; }
+    .closing {
+      background: var(--lime);
+      border-radius: 20px;
+      padding: 32px 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 54px;
+    }
+    .closing h2 { font-size: 1.8rem; }
+    .closing p { margin-top: 10px; max-width: 650px; }
+    .closing .button { background: var(--green); color: #fff; margin: 0; white-space: nowrap; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 38px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 25px; }
+    footer p { max-width: 750px; font-size: .78rem; color: var(--muted); }
+    @media (max-width: 950px) {
+      .category-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero { grid-template-columns: 1fr  .8fr; }
+      h1 { font-size: 3.3rem; }
+      .inspiration { grid-template-columns: repeat(2, 1fr); }
+      .guide-layout { grid-template-columns: 1fr; }
+      .topics { grid-template-columns: 1fr; }
+      .faq-layout { gap: 28px; }
+      .masthead-note { display: none; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: calc(100% - 28px); }
+      .masthead-inner { min-height: 67px; }
+      .category-heading { display: block; }
+      .category-heading p { margin-top: 7px; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-grid a { padding: 11px; font-size: .79rem; }
+      .hero { grid-template-columns: 1fr; border-radius: 18px; }
+      h1 { font-size: clamp(2.8rem, 12vw, 4rem); }
+      .hero-visual { margin: 0 18px 18px; }
+      .hero-visual img { aspect-ratio: 1.4 / 1; }
+      .hero-copy { padding: 29px 24px; }
+      .answer, .faq-layout { grid-template-columns: 1fr; gap: 19px; }
+      .section { padding: 42px 0; }
+      .section-heading { display: block; }
+      .section-heading > p { margin-top: 15px; }
+      .inspiration { gap: 10px; }
+      .visual-card figcaption { padding: 15px; }
+      .visual-card h3 { font-size: 1rem; }
+      .visual-card p { font-size: .81rem; }
+      .guide, .topic { padding: 23px; }
+      .closing { display: block; padding: 28px; }
+      .closing .button { margin-top: 22px; white-space: normal; }
+      .footer-inner { display: block; }
+      footer p { margin-top: 15px; }
+      th, td { padding: 14px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "PikoBuy spreadsheet: categorieën, QC en keuzehulp",
+        "description": "Een onafhankelijke Nederlandstalige keuzehulp voor het vergelijken van kleding, sneakers, maten, productinformatie en QC-foto’s.",
+        "inLanguage": "nl",
+        "about": {
+          "@type": "Thing",
+          "name": "PikoBuy spreadsheet"
+        }
+      },
+      {
+        "@type": "Article",
+        "headline": "PikoBuy koopgids: van productlink naar een onderbouwde selectie",
+        "inLanguage": "nl",
+        "description": "Vergelijk productinformatie, controleer afmetingen en beoordeel QC-foto’s voordat je een bestelling overweegt.",
+        "articleBody": "Begin bij de oorspronkelijke productpagina. Controleer model, uitvoering, materiaal en maatvoering. Vergelijk kledingmaten in centimeters met een passend kledingstuk. Beoordeel QC-foto’s op zichtbare details, maar behandel ze niet als bewijs van authenticiteit of duurzaamheid."
+      },
+      {
+        "@type": "FAQPage",
+        "inLanguage": "nl",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Wat is een PikoBuy spreadsheet?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Een PikoBuy spreadsheet is een geordend overzicht van productlinks dat mensen gebruiken bij het zoeken naar artikelen voor een mogelijke bestelling via PikoBuy. Een vermelding bewijst op zichzelf geen voorraad, kwaliteit of authenticiteit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is dit de officiële website van PikoBuy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nee. Dit is een onafhankelijke Nederlandstalige informatiepagina met categorie-ingangen naar cafans.com. Deze pagina vertegenwoordigt PikoBuy en de afgebeelde merken niet."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Kan ik hier een spreadsheet downloaden?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nee. Deze pagina biedt een leesbare keuzehulp en categorie-ingangen, geen downloadbaar spreadsheetbestand of actuele productdatabase."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hoe kies ik de juiste maat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Gebruik de maattabel van het specifieke artikel en vergelijk de afmetingen in centimeters met een passend kledingstuk. Controleer bij schoenen de aangegeven meetmethode; voetlengte en binnenzoollengte zijn niet hetzelfde."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wat vertellen QC-foto’s mij?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "QC-foto’s kunnen zichtbare kenmerken zoals kleur, naden, vorm en eventuele beschadigingen tonen. Ze bewijzen geen authenticiteit, draagcomfort, materiaalsamenstelling of langdurige kwaliteit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Hoe bereken ik de totale kosten?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tel de artikelprijs, eventuele binnenlandse verzending, servicekosten, internationale verzending en toepasselijke invoerkosten bij elkaar op. Controleer bestemming, pakketgewicht, afmetingen en voorwaarden voordat je betaalt."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/tmfvk/">
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <a class="logo" href="https://www.cafans.com" aria-label="Ga naar cafans.com">cafans<span>.com</span></a>
+      <p class="masthead-note">Een rustige start voor een beter onderbouwde selectie.</p>
+      <a class="toplink" href="https://www.cafans.com">Bekijk cafans ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <nav class="wrap categories" aria-label="Productcategorieën op cafans">
+      <div class="category-heading">
+        <h2 class="eyebrow">Begin bij een categorie</h2>
+        <p>Deze ingangen openen de bijbehorende categorie op cafans.com.</p>
+      </div>
+      <div class="category-grid">
+        <a href="https://cafans.com/category-911-Shoes.html">Sneakers &amp; schoenen <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-912-Hoodies%2FSweaters.html">Hoodies &amp; truien <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-913-T-Shirts.html">T-shirts <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-914-Jackets.html">Jassen <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-915-Pants%2FShorts.html">Broeken &amp; shorts <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-916-Headwear.html">Petten &amp; hoofddeksels <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-917-Sets.html">Kledingsets <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-918-underwear%2Funderpants.html">Ondergoed <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-919-Jersey.html">Sportshirts <span aria-hidden="true">↗</span></a>
+        <a href="https://cafans.com/category-920-Accessories.html">Accessoires <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">De selectie begint bij de details</p>
+          <h1 id="page-title">PikoBuy spreadsheet</h1>
+          <p>Een mooie foto trekt je aandacht. De juiste informatie helpt je kiezen. Gebruik deze Nederlandstalige gids om sneakers, kleding en accessoires met meer aandacht te vergelijken.</p>
+          <a class="button" href="https://www.cafans.com">Ontdek het aanbod op cafans <span aria-hidden="true">↗</span></a>
+          <div class="hero-note">Onafhankelijke keuzehulp · Geen officiële PikoBuy-website</div>
+        </div>
+        <figure class="hero-visual">
+          <img
+            src="https://images.footlocker.com/is/image/EBFL2/N8490100?hei=640&amp;wid=640"
+            alt="Witte Nike Air Max sneaker in zijaanzicht met zichtbare luchtunit in de hiel"
+            width="640"
+            height="640"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async">
+          <figcaption>
+            <strong>Vorm eerst. Details daarna.</strong>
+            Bekijk bij sneakers ook de hiel, zool en maatvoering. Eén zijaanzicht vertelt niet het hele verhaal.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="answer" aria-labelledby="definition-title">
+        <h2 id="definition-title">Wat is een PikoBuy spreadsheet?</h2>
+        <div>
+          <p>Een <strong>PikoBuy spreadsheet</strong> is een geordend overzicht van productlinks dat mensen gebruiken bij het zoeken naar artikelen voor een mogelijke bestelling via PikoBuy. Een vermelding bewijst op zichzelf geen voorraad, kwaliteit of authenticiteit.</p>
+          <p class="muted">Deze pagina is een redactionele keuzehulp, geen actuele productdatabase. De categorieën verwijzen naar cafans.com; controleer op de uiteindelijke productpagina welke informatie en bestelmogelijkheden beschikbaar zijn.</p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="inspiration-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Een visueel vertrekpunt</p>
+            <h2 id="inspiration-title">Kleine details, andere vragen.</h2>
+          </div>
+          <p>Van een sjaal tot een armband: elk type artikel vraagt om eigen controlepunten.</p>
+        </div>
+
+        <div class="inspiration">
+          <figure class="visual-card">
+            <img
+              src="https://my.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-essential-scarf--M77728_PM2_Front%20view.jpg?wid=480&amp;hei=540"
+              alt="Beige Louis Vuitton sjaal met licht monogrampatroon en franjes"
+              width="480" height="540" loading="lazy" decoding="async">
+            <figcaption>
+              <h3>Louis Vuitton · textuur</h3>
+              <p>Vergelijk bij een sjaal lengte, breedte en materiaalinformatie. Een detailfoto kan de weefstructuur verduidelijken.</p>
+              <a href="https://www.cafans.com">Verken cafans ↗</a>
+            </figcaption>
+          </figure>
+
+          <figure class="visual-card">
+            <img
+              src="https://cuccuini.it/sync/foto/FW25---Gucci---7890164HBA89784.JPG"
+              alt="Beige Gucci pet met GG-patroon en groen-rode streep over de klep"
+              width="480" height="540" loading="lazy" decoding="async">
+            <figcaption>
+              <h3>Gucci · pasvorm</h3>
+              <p>Controleer bij een pet de hoofdomtrek, verstelbaarheid en diepte. De maat op het label is slechts een vertrekpunt.</p>
+              <a href="https://www.cafans.com">Bekijk cafans ↗</a>
+            </figcaption>
+          </figure>
+
+          <figure class="visual-card">
+            <img
+              src="https://assets.hermes.com/is/image/hermesproduct/068406FP37_front_wm_2?wid=480&amp;hei=540"
+              alt="Bruine gevlochten Hermès armband met zilverkleurige H-sluiting"
+              width="480" height="540" loading="lazy" decoding="async">
+            <figcaption>
+              <h3>Hermès · sluiting</h3>
+              <p>Bekijk bij een armband de binnenomtrek, sluiting en afwerking. Vraag bij ontbrekende maten om aanvullende informatie.</p>
+              <a href="https://www.cafans.com">Ontdek cafans ↗</a>
+            </figcaption>
+          </figure>
+
+          <figure class="visual-card">
+            <img
+              src="https://assets.christiandior.com/is/image/diorprod/M0619ONUHM030_E01?wid=480&amp;hei=540&amp;qlt=75"
+              alt="Witte Lady Dior handtas met doorgestikt patroon, ronde handvatten en goudkleurige details"
+              width="480" height="540" loading="lazy" decoding="async">
+            <figcaption>
+              <h3>Dior · constructie</h3>
+              <p>Vergelijk bij een tas de afmetingen, handvatten en binnenkant. Een frontfoto toont de indeling niet.</p>
+              <a href="https://www.cafans.com">Ga naar cafans ↗</a>
+            </figcaption>
+          </figure>
+        </div>
+        <p class="image-note">Merkbeelden dienen uitsluitend als visuele referentie. Ze bevestigen geen beschikbaarheid op cafans, authenticiteit van andere artikelen of samenwerking met de merken.</p>
+      </section>
+
+      <section class="section" aria-labelledby="guide-title">
+        <div class="guide-layout">
+          <aside class="guide-intro">
+            <p class="eyebrow">Praktische leesroute</p>
+            <h2 id="guide-title">PikoBuy koopgids: eerst begrijpen, dan selecteren.</h2>
+            <p>Een bruikbare selectie bevat meer dan een merknaam. Noteer wat je zoekt, welke maat je nodig hebt en welke informatie nog ontbreekt.</p>
+            <p>Zo krijgen <strong>PikoBuy finds</strong> context: je vergelijkt artikelen op eigenschappen die voor jou relevant zijn.</p>
+          </aside>
+
+          <div class="guide-stack">
+            <article class="guide">
+              <p class="number">01 / PRODUCTINFORMATIE</p>
+              <h3>PikoBuy productlinks controleren</h3>
+              <p>Begin bij de oorspronkelijke productpagina. Controleer het model, de gekozen uitvoering en de materiaalbeschrijving. Bekijk of foto's, titel en geselecteerde variant hetzelfde artikel tonen.</p>
+              <p>Let bij <strong>Taobao productlinks vergelijken</strong> en <strong>Weidian productinformatie controleren</strong> vooral op ontbrekende afmetingen en afwijkende varianten. Een link die opent, zegt nog niets over leverbaarheid of betrouwbaarheid.</p>
+            </article>
+
+            <article class="guide">
+              <p class="number">02 / AFMETINGEN</p>
+              <h3>Een maattabel lezen zonder te gokken</h3>
+              <p>Bij <strong>kledingmaten vergelijken in centimeters</strong> helpt een kledingstuk dat al goed zit. Leg het plat en meet op dezelfde manier als in de tabel. Borstbreedte en borstomtrek zijn verschillende maten.</p>
+              <p>Voor <strong>sneakermaat en voetlengte vergelijken</strong> controleer je eerst de meetmethode. Een binnenzoolmaat kun je niet automatisch als voetlengte gebruiken. Vraag verduidelijking wanneer de tabel onduidelijk is.</p>
+            </article>
+
+            <article class="guide">
+              <p class="number">03 / ZICHTBARE DETAILS</p>
+              <h3>PikoBuy QC-foto’s zorgvuldig beoordelen</h3>
+              <p>Wie <strong>QC-foto’s van sneakers beoordelen</strong> wil, bekijkt bij voorkeur beide schoenen, de zool en de hiel. Bij <strong>kledingnaden op foto controleren</strong> zijn close-ups van zomen, manchetten en aansluitingen nuttig.</p>
+              <p>Foto’s kunnen zichtbare afwijkingen laten zien. Ze bewijzen geen authenticiteit, draagcomfort, materiaalsamenstelling of langdurige kwaliteit. Kleur kan bovendien veranderen door belichting en scherminstellingen.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="comparison-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Controle per categorie</p>
+            <h2 id="comparison-title">Kijk naar wat je echt wilt weten.</h2>
+          </div>
+          <p>Gebruik de controlepunten hieronder om ontbrekende informatie sneller te herkennen.</p>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <caption>Van categorie naar een concrete controlevraag</caption>
+            <thead>
+              <tr>
+                <th scope="col">Categorie</th>
+                <th scope="col">Waarop vergelijken?</th>
+                <th scope="col">Wat vraag je bij twijfel?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Sneakers</th>
+                <td>Bij sneakers op pasvorm vergelijken: leest, maatadvies, zool en hielvorm.</td>
+                <td>Welke lengte wordt gemeten en zijn er foto's van beide schoenen?</td>
+              </tr>
+              <tr>
+                <th scope="row">Hoodies &amp; truien</th>
+                <td>Bij een hoodie maattabel controleren: borstbreedte, lengte en mouwlengte.</td>
+                <td>Zijn dit kledingmaten of aanbevolen lichaamsmaten?</td>
+              </tr>
+              <tr>
+                <th scope="row">T-shirts</th>
+                <td>Voor een T-shirt pasvorm vergelijken: schouderbreedte, lengte en stofbeschrijving.</td>
+                <td>Is de snit recht, aangesloten of ruim?</td>
+              </tr>
+              <tr>
+                <th scope="row">Jassen</th>
+                <td>Bij een jas voering en sluiting bekijken: binnenfoto’s, naden en bewegingsruimte.</td>
+                <td>Is er ruimte voor een trui en wat vermeldt het materiaallabel?</td>
+              </tr>
+              <tr>
+                <th scope="row">Broeken &amp; shorts</th>
+                <td>Voor een broek taille en binnenbeen meten: taillebereik, heupbreedte en lengte.</td>
+                <td>Is de taille elastisch en hoe is de lengte opgenomen?</td>
+              </tr>
+              <tr>
+                <th scope="row">Hoofddeksels</th>
+                <td>Bij een pet hoofdomtrek controleren: maatbereik, sluiting en kroonhoogte.</td>
+                <td>Wat is het minimale en maximale verstelbereik?</td>
+              </tr>
+              <tr>
+                <th scope="row">Sets &amp; sportshirts</th>
+                <td>Bij een kledingset maten vergelijken: boven- en onderstuk afzonderlijk beoordelen.</td>
+                <td>Zijn beide delen apart bemeten en welke bedrukking hoort bij de variant?</td>
+              </tr>
+              <tr>
+                <th scope="row">Ondergoed</th>
+                <td>Bij ondergoed materiaal controleren: samenstelling, taillebereik en onderhoud.</td>
+                <td>Welke retourvoorwaarden gelden voor deze productgroep?</td>
+              </tr>
+              <tr>
+                <th scope="row">Accessoires</th>
+                <td>Bij accessoires afmetingen vergelijken: omtrek, sluiting, materiaal en afwerking.</td>
+                <td>Zijn er detailfoto’s en volledige maten beschikbaar?</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="articles-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Drie korte dossiers</p>
+            <h2 id="articles-title">Verder kijken dan de productfoto.</h2>
+          </div>
+          <p>Een gerichte selectie houdt rekening met je garderobe, de totale kosten en de voorwaarden.</p>
+        </div>
+
+        <div class="topics">
+          <article class="topic">
+            <p class="eyebrow">Dossier / garderobe</p>
+            <h3>Streetwear combineren zonder dubbel te kopen</h3>
+            <p>Begin met iets dat je al draagt. Wie <strong>een streetwear outfit samenstellen</strong> wil, kan eerst bepalen welke kleur, pasvorm of laag nog ontbreekt.</p>
+            <ul>
+              <li><strong>Hoodie en broek combineren:</strong> vergelijk verhoudingen en stofdikte.</li>
+              <li><strong>Sneakers bij een dagelijkse outfit kiezen:</strong> denk aan gebruik en onderhoud.</li>
+              <li><strong>Accessoires op formaat kiezen:</strong> controleer of afmetingen bij je gebruik passen.</li>
+            </ul>
+          </article>
+
+          <article class="topic">
+            <p class="eyebrow">Dossier / kosten</p>
+            <h3>Een artikelprijs is geen totaalbedrag</h3>
+            <p>Voor <strong>internationale verzendkosten inschatten</strong> heb je meer nodig dan een productprijs. Bestemming, pakketgewicht, afmetingen en gekozen verzendmethode kunnen de uitkomst beïnvloeden.</p>
+            <ul>
+              <li><strong>Totale bestelkosten berekenen:</strong> neem alle vermelde kostenposten mee.</li>
+              <li><strong>Pakketgewicht en afmetingen vergelijken:</strong> controleer de gebruikte tariefmethode.</li>
+              <li><strong>Invoerkosten voor Nederland controleren:</strong> raadpleeg actuele informatie voor jouw situatie.</li>
+            </ul>
+          </article>
+
+          <article class="topic">
+            <p class="eyebrow">Dossier / voorwaarden</p>
+            <h3>Lees de afspraken vóór je beslist</h3>
+            <p>Bij <strong>retourvoorwaarden vóór aankoop lezen</strong> zijn timing, uitzonderingen en eventuele kosten relevant. Neem geen retourtermijn aan op basis van een andere winkel of een oud bericht.</p>
+            <ul>
+              <li><strong>Productvariant vóór betaling controleren:</strong> vergelijk maat, kleur en uitvoering.</li>
+              <li><strong>Ontbrekende productinformatie opvragen:</strong> stel een specifieke vraag.</li>
+              <li><strong>Authenticiteit van merkartikelen beoordelen:</strong> een spreadsheet of QC-foto is geen bewijs.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section faq-layout" aria-labelledby="faq-title">
+        <div class="faq-heading">
+          <p class="eyebrow">Direct antwoord</p>
+          <h2 id="faq-title">Veelgestelde vragen</h2>
+          <p>Een paar duidelijke antwoorden voordat je verder kijkt. Controleer actuele productgegevens en voorwaarden altijd bij de betreffende aanbieder.</p>
+        </div>
+
+        <div>
+          <details open>
+            <summary>Wat is een PikoBuy spreadsheet?</summary>
+            <p>Een PikoBuy spreadsheet is een geordend overzicht van productlinks dat mensen gebruiken bij het zoeken naar artikelen voor een mogelijke bestelling via PikoBuy. Een vermelding bewijst op zichzelf geen voorraad, kwaliteit of authenticiteit.</p>
+          </details>
+          <details>
+            <summary>Is dit de officiële website van PikoBuy?</summary>
+            <p>Nee. Dit is een onafhankelijke Nederlandstalige informatiepagina met categorie-ingangen naar cafans.com. Deze pagina vertegenwoordigt PikoBuy en de afgebeelde merken niet.</p>
+          </details>
+          <details>
+            <summary>Kan ik hier een spreadsheet downloaden?</summary>
+            <p>Nee. Deze pagina biedt een leesbare keuzehulp en categorie-ingangen, geen downloadbaar spreadsheetbestand of actuele productdatabase.</p>
+          </details>
+          <details>
+            <summary>Hoe kies ik de juiste maat?</summary>
+            <p>Gebruik de maattabel van het specifieke artikel en vergelijk de afmetingen in centimeters met een passend kledingstuk. Controleer bij schoenen de aangegeven meetmethode; voetlengte en binnenzoollengte zijn niet hetzelfde.</p>
+          </details>
+          <details>
+            <summary>Wat vertellen QC-foto’s mij?</summary>
+            <p>QC-foto’s kunnen zichtbare kenmerken zoals kleur, naden, vorm en eventuele beschadigingen tonen. Ze bewijzen geen authenticiteit, draagcomfort, materiaalsamenstelling of langdurige kwaliteit.</p>
+          </details>
+          <details>
+            <summary>Hoe bereken ik de totale kosten?</summary>
+            <p>Tel de artikelprijs, eventuele binnenlandse verzending, servicekosten, internationale verzending en toepasselijke invoerkosten bij elkaar op. Controleer bestemming, pakketgewicht, afmetingen en voorwaarden voordat je betaalt.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div>
+          <h2 id="closing-title">Een duidelijke selectie begint klein.</h2>
+          <p>Kies een categorie, vergelijk de details en bewaar alleen wat bij je wensen en maten past.</p>
+        </div>
+        <a class="button" href="https://www.cafans.com">Verder naar cafans <span aria-hidden="true">↗</span></a>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <a class="logo" href="https://www.cafans.com">cafans<span>.com</span></a>
+      <p>Onafhankelijke informatie over het gebruiken van een PikoBuy spreadsheet. Geen officiële relatie met PikoBuy, Nike, Louis Vuitton, Gucci, Hermès of Dior. Merknamen identificeren uitsluitend de getoonde visuele referenties. Deze pagina verwerkt geen bestellingen of betalingen.</p>
+    </div>
+  </footer>
+</body>
+</html>
